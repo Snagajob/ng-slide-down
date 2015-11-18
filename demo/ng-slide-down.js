@@ -42,20 +42,22 @@
             if (openPromise) {
               $timeout.cancel(openPromise);
             }
-            element.css({
-              overflow: 'hidden',
-              transitionProperty: 'height',
-              transitionDuration: '' + duration + 's',
-              transitionTimingFunction: timingFunction,
-              height: getHeight()
-            });
-            return openPromise = $timeout(function () {
-              return element.css({
-                overflow: 'visible',
-                transition: 'none',
-                height: 'auto'
+            element.css({ height: getHeight() });
+            return $timeout(function () {
+              element.css({
+                overflow: 'hidden',
+                transitionProperty: 'height',
+                transitionDuration: '' + duration + 's',
+                transitionTimingFunction: timingFunction
               });
-            }, duration * 1000);
+              return openPromise = $timeout(function () {
+                return element.css({
+                  overflow: 'visible',
+                  transition: 'none',
+                  height: 'auto'
+                });
+              }, duration * 1000);
+            });
           });
         };
         hide = function () {

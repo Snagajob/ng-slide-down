@@ -29,19 +29,24 @@ angular.module("ng-slide-down", []).directive "ngSlideDown", ($timeout )->
       $timeout ->
         $timeout.cancel(openPromise) if openPromise
         element.css {
-          overflow: "hidden"
-          transitionProperty: "height"
-          transitionDuration: "#{duration}s"
-          transitionTimingFunction: timingFunction
           height: getHeight()
         }
-        openPromise = $timeout ()->
+
+        $timeout ->
           element.css {
-            overflow: "visible"
-            transition: "none",
-            height: "auto"
+            overflow: "hidden"
+            transitionProperty: "height"
+            transitionDuration: "#{duration}s"
+            transitionTimingFunction: timingFunction
           }
-        , duration*1000
+
+          openPromise = $timeout ()->
+            element.css {
+              overflow: "visible"
+              transition: "none",
+              height: "auto"
+            }
+          , duration*1000
 
 
     hide = ()->
