@@ -56,9 +56,9 @@
                   transition: 'none',
                   height: 'auto'
                 });
-              }, duration * 1000);
-            });
-          });
+              }, duration * 1000, false);
+            }, 0, false);
+          }, 0, false);
         };
         hide = function () {
           if (openPromise) {
@@ -93,7 +93,7 @@
               element.css({ height: getHeight() });
               element[0].clientHeight;
             }
-            return $timeout(hide);
+            return $timeout(hide, 0, false);
           }
         });
       };

@@ -46,7 +46,9 @@ angular.module("ng-slide-down", []).directive "ngSlideDown", ($timeout )->
               transition: "none",
               height: "auto"
             }
-          , duration*1000
+          , duration*1000, false
+        , 0, false
+      ,0, false
 
 
     hide = ()->
@@ -74,7 +76,7 @@ angular.module("ng-slide-down", []).directive "ngSlideDown", ($timeout )->
             height: getHeight()
           }
           element[0].clientHeight # Force reflow so the animation triggers reliably
-        $timeout hide
+        $timeout hide, 0, false
 
   return {
     restrict: 'A'
